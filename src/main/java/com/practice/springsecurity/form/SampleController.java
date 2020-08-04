@@ -1,4 +1,4 @@
-package com.practice.springsecurity.from;
+package com.practice.springsecurity.form;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +33,7 @@ public class SampleController {
 
     @GetMapping("/admin")
     public String admin(Model model, Principal principal) {
-        model.addAttribute("message", "hello " + principal.getName());
+        model.addAttribute("message", "hello " + principal.getName() + " Admin");
         return "admin";
     }
 }
