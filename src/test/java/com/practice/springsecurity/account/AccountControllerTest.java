@@ -32,7 +32,7 @@ class AccountControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "sunny", roles = "USER")
+    @WithUser
     public void index_user() throws Exception {
         mockMvc.perform(get("/"))
                 .andDo(print())
