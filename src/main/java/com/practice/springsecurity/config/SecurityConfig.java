@@ -11,8 +11,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests(requests -> requests.anyRequest().authenticated())
-                .formLogin();
+        http.authorizeRequests(requests -> requests.anyRequest().authenticated());
+
+        http.formLogin()
+                .loginPage("/loginPage")
+                .defaultSuccessUrl("/")
+                .failureUrl("/login")
+                .usernameParameter("userId")
+                .passwordParameter("secret")
+                .loginProcessingUrl("/login-proc")
+                .successHandler((request, response, authentication) -> {
+                    System.out.println("authentication " + authentication.getName());
+                    response.sendRedirect("/");
+                })
+                .failureHandler(((request, response, exception) -> {
+                    System.out.println("exception " + exception.getMessage());
+                    response.sendRedirect("/login");
+                }))
+                .permitAll();
     }
 }
