@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  security:
+    image: postgres :10
+    container_name: security-practice
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_ROOT_PASSWORD=tiger
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=tiger
+      - POSTGRES_DATABASE=securitynoob
+      - TZ=UTC
+    volumes:
+      - security:/data/postgres
+
+volumes:
+  security:
